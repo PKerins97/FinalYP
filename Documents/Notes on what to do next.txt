@@ -1,0 +1,5 @@
+Create new csv on smaller cube
+Run it against trained model
+Compare the predicted and actual data given 
+Add 2 new cameras - top  and side 
+
