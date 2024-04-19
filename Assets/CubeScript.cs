@@ -10,14 +10,18 @@ public class CubeScript : MonoBehaviour
     private StreamWriter csvWriter;
     public Camera topCam;
     public Camera sideCam;
+    public float minScale = 0.5f;
+    public float maxScale = 2.0f;
+    
     void Start()
     {
         // Set the initial position randomly
         RandomizePosition();
 
-        string filePath = Application.dataPath + "/CubeData.csv";
-        //string filePath1 = Application.dataPath + "/CubeData1.csv";
+         string filePath = Application.dataPath + "/CubeData.csv";
+        //string filePath1 = Application.dataPath + "/testData.csv";
         csvWriter = new StreamWriter(filePath);
+        
         //csvWriter.WriteLine("Object Name,Position X,Position Y Position,3D Corner Position, Cube centre, Cube Scale X, Cube Scale Y, Cube Scale Z, Cube Orientation");
     }
 
@@ -38,12 +42,21 @@ public class CubeScript : MonoBehaviour
         transform.Rotate(rotationX, rotationY, rotationZ);
         string nextLine = "";
 
-        nextLine += theVertices();
+
+            // Generate random scale values
+            float randomScaleX = Random.Range(minScale, maxScale);
+            float randomScaleY = Random.Range(minScale, maxScale);
+            float randomScaleZ = Random.Range(minScale, maxScale);
+
+            // Apply random scale
+            transform.localScale = new Vector3(randomScaleX, randomScaleY, randomScaleZ);
+
+            nextLine += theVertices();
         // Print the current position
        // Debug.Log("Current Position: " + transform.position);
         Transform cube = this.transform;
 
-        string cubeString = convertVectorToString(transform.position) + " , " + convertVectorToString(transform.rotation.eulerAngles) + " , " + convertVectorToString(transform.localScale);
+        string cubeString = convertVectorToString(transform.position) + " , " + convertQuatToString(transform.rotation) + " , " + convertVectorToString(transform.localScale);
 
         csvWriter.WriteLine(nextLine + " , " + cubeString);
 
@@ -81,7 +94,10 @@ public class CubeScript : MonoBehaviour
     {
         return v.x.ToString() + " , " + v.y.ToString() + " , " + v.z.ToString();
     }
-
+    private string convertQuatToString(Quaternion v)
+    {
+        return v.x.ToString() + " , " + v.y.ToString() + " , " + v.z.ToString() + " , " + v.w.ToString();
+    }
 
     private string convertVectorToString(Vector2 v)
     {
@@ -100,9 +116,9 @@ public class CubeScript : MonoBehaviour
     void RandomizePosition()
     {
         // Set the cube's position to a random point within a certain range
-        float randomX = Random.Range(-0f, 10f);
-        float randomY = Random.Range(-0f, 10f);
-        float randomZ = Random.Range(-0f, 10f);
+        float randomX = Random.Range(-0f, 15f);
+        float randomY = Random.Range(-0f, 15f);
+        float randomZ = Random.Range(-0f, 15f);
         transform.position = new Vector3(randomX, 0f, randomZ);
 
         // Print the initial position
