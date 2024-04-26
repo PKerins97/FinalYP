@@ -10,19 +10,19 @@ public class CubeScript : MonoBehaviour
     private StreamWriter csvWriter;
     public Camera topCam;
     public Camera sideCam;
-    public float minScale = 0.5f;
-    public float maxScale = 2.0f;
+    public float minScale = 0.2f;
+    public float maxScale = 3.0f;
     
     void Start()
     {
         // Set the initial position randomly
         RandomizePosition();
 
-         string filePath = Application.dataPath + "/CubeData.csv";
-        //string filePath1 = Application.dataPath + "/testData.csv";
-        csvWriter = new StreamWriter(filePath);
+       //string filePath = Application.dataPath + "/CubeData.csv";
+        string filePath1 = Application.dataPath + "/testData.csv";
+        csvWriter = new StreamWriter(filePath1);
         
-        //csvWriter.WriteLine("Object Name,Position X,Position Y Position,3D Corner Position, Cube centre, Cube Scale X, Cube Scale Y, Cube Scale Z, Cube Orientation");
+        
     }
 
     void Update()
@@ -31,8 +31,8 @@ public class CubeScript : MonoBehaviour
         float horizontalMovement = Mathf.Sin(Time.time) * moveSpeed * Time.deltaTime;
         float verticalMovement = Mathf.Cos(Time.time) * moveSpeed * Time.deltaTime;
         Vector3 movement = new Vector3(horizontalMovement, 0f, verticalMovement);
-        float cubeMoveInScreen = Random.Range(-3f, 3f);
-        transform.position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+        float cubeMoveInScreen = Random.Range(-4f, 4f);
+        transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f));
 
 
         // Rotate the cube continuously on all axes
