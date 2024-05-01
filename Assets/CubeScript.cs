@@ -18,9 +18,9 @@ public class CubeScript : MonoBehaviour
         // Set the initial position randomly
         RandomizePosition();
 
-       string filePath = Application.dataPath + "/CubeData.csv";
-        //string filePath1 = Application.dataPath + "/testData.csv";
-        csvWriter = new StreamWriter(filePath);
+       //string filePath = Application.dataPath + "/CubeData.csv";
+        string filePath1 = Application.dataPath + "/testData.csv";
+        csvWriter = new StreamWriter(filePath1);
         
         
     }
